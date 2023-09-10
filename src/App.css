@@ -1,7 +1,30 @@
 #root {
-  max-width: 1280px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding:0 1rem;
+}
+
+.call-todo-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 2rem 0;
+}
+
+.app-section {
+  padding: 0.5rem 1rem;
+  border: 1px solid darkgray;
+  border-radius: 8px;
+}
+
+.app-section__header {
+  margin-bottom: 1rem;
+}
+
+.app-section__title {
+  font-size: 20px;
+  line-height: 1.65;
+  margin-bottom: 0;
 }
 
