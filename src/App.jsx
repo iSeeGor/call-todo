@@ -6,6 +6,8 @@ function App() {
     <>
       <div className="call-todo-header">
           <AddTodoSection/>
+
+          <AddTodoSection/>
       </div>
     </>
   )
