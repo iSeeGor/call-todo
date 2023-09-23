@@ -1,0 +1,29 @@
+.Input {
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid #d3d3d3;
+    padding: 6px 14px;
+    border-radius: 6px;
+    background-color: white;
+    width: 100%;
+    transition: border-color 0.2s ease-in-out;
+    outline: none;
+}
+
+.Input::placeholder {
+    color: #888888;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.Input:hover {
+    border-color: #888888;
+}
+
+.Input:focus {
+    border-color: #888888;
+}
+
+.Input:focus::placeholder {
+    opacity: 0;
+}

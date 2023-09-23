@@ -1,4 +1,13 @@
+import Input from "./ui/Input/Input";
+import {useState} from "react";
+
+
 const AddTodoSection = () => {
+    const [value, setValue] = useState({
+        name: '',
+        phone: '',
+        time: ''
+    });
 
     return (
         <>
@@ -9,11 +18,26 @@ const AddTodoSection = () => {
 
                 <div className="add-call">
                     <div className="add-call__body">
-                        <input className="form-control" type="text" placeholder="Name"/>
+                        <Input
+                            type="text"
+                            placeholder="Name"
+                            value={value.name}
+                            onChange={ e => setValue({...value, name: e.target.value}) }
+                        />
 
-                        <input className="form-control" type="text" placeholder="Phone"/>
+                        <Input
+                            type="text"
+                            placeholder="Phone"
+                            value={value.phone}
+                            onChange={ e => setValue({...value, phone: e.target.value}) }
+                        />
 
-                        <input className="form-control" type="text" placeholder="Time"/>
+                        <Input
+                            type="text"
+                            placeholder="Time"
+                            value={value.time}
+                            onChange={ e => setValue({...value, time: e.target.value}) }
+                        />
                     </div>
 
                     <div className="add-call__footer">
