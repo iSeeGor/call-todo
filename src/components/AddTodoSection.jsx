@@ -9,6 +9,12 @@ const AddTodoSection = () => {
         time: ''
     });
 
+    const addCall = (e) => {
+        e.preventDefault();
+
+        console.log(value)
+    }
+
     return (
         <>
             <section className="app-section">
@@ -16,7 +22,7 @@ const AddTodoSection = () => {
                     <h2 className="app-section__title">Add Call</h2>
                 </header>
 
-                <div className="add-call">
+                <form className="add-call">
                     <div className="add-call__body">
                         <Input
                             type="text"
@@ -33,7 +39,7 @@ const AddTodoSection = () => {
                         />
 
                         <Input
-                            type="text"
+                            type="time"
                             placeholder="Time"
                             value={value.time}
                             onChange={ e => setValue({...value, time: e.target.value}) }
@@ -41,9 +47,13 @@ const AddTodoSection = () => {
                     </div>
 
                     <div className="add-call__footer">
-                        <button type="button" className="button">Add Call</button>
+                        <button
+                            type="submit"
+                            className="button"
+                            onClick={addCall}
+                        >Add Call</button>
                     </div>
-                </div>
+                </form>
             </section>
         </>
     )
