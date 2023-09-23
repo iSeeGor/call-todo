@@ -1,5 +1,6 @@
 import './App.css'
 import AddTodoSection from './components/AddTodoSection';
+import CallTodoList from "./components/CallTodoList.jsx";
 function App() {
 
   return (
@@ -8,6 +9,10 @@ function App() {
           <AddTodoSection/>
 
           <AddTodoSection/>
+      </div>
+
+      <div className="call-todo-body">
+          <CallTodoList />
       </div>
     </>
   )
