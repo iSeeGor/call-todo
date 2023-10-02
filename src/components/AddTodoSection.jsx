@@ -1,18 +1,29 @@
 import Input from "./ui/Input/Input";
 import {useState} from "react";
 
+import useLocalStorage from '../hooks/useLocalStorage.js'
 
-const AddTodoSection = () => {
-    const [value, setValue] = useState({
+
+const AddTodoSection = ({addCall}) => {
+    const [value, setValue] = useLocalStorage([], 'calltodo');
+    const [call, setCall] = useState({
         name: '',
         phone: '',
         time: ''
-    });
+    })
 
-    const addCall = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(value)
+        const data = new FormData(e.target);
+
+        // setValue([...value, Object.fromEntries(data.entries())])
+
+        addCall(Object.fromEntries(data.entries()))
+    }
+
+    const onChange = (e) => {
+        setCall({...call, [e.target.name]: e.target.value});
     }
 
     return (
@@ -22,27 +33,30 @@ const AddTodoSection = () => {
                     <h2 className="app-section__title">Add Call</h2>
                 </header>
 
-                <form className="add-call">
+                <form className="add-call" onSubmit={handleSubmit}>
                     <div className="add-call__body">
                         <Input
                             type="text"
+                            name="name"
                             placeholder="Name"
-                            value={value.name}
-                            onChange={ e => setValue({...value, name: e.target.value}) }
+                            value={call.name}
+                            onChange={onChange}
                         />
 
                         <Input
                             type="text"
+                            name="phone"
                             placeholder="Phone"
-                            value={value.phone}
-                            onChange={ e => setValue({...value, phone: e.target.value}) }
+                            value={call.phone}
+                            onChange={onChange}
                         />
 
                         <Input
                             type="time"
+                            name="time"
                             placeholder="Time"
-                            value={value.time}
-                            onChange={ e => setValue({...value, time: e.target.value}) }
+                            value={call.time}
+                            onChange={onChange}
                         />
                     </div>
 
@@ -50,7 +64,6 @@ const AddTodoSection = () => {
                         <button
                             type="submit"
                             className="button"
-                            onClick={addCall}
                         >Add Call</button>
                     </div>
                 </form>

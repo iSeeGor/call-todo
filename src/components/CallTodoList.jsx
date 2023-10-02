@@ -1,14 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import useLocalStorage from "../hooks/useLocalStorage.js";
 
-function CallTodoList(props) {
-    const data = [
-        {
-            name: 'Igor',
-            phone: '+3000000000',
-            time: '22:40',
-            completed: false,
-        }
-    ]
+function CallTodoList({callList}) {
+    const [call, setCall] = useLocalStorage([], 'calltodo');
+
+    const addCall = () => {
+        setCall([...call, {name: 'test', phone: '23432234', time: '00:00'}])
+    }
 
     return (
         <>
@@ -25,7 +23,7 @@ function CallTodoList(props) {
                     </tr>
 
                     {
-                        data.map((item, index) => (
+                        callList.map((item, index) => (
                            <tr key={index}>
                                <td>{item.name}</td>
                                <td>{item.phone}</td>
@@ -37,6 +35,8 @@ function CallTodoList(props) {
                     }
                 </tbody>
             </table>
+
+            <button style={{marginTop: '20px',}} onClick={addCall}>Add</button>
         </>
     );
 }
