@@ -6,6 +6,7 @@ const Input = (props) => {
             <input
                 className={classes.Input}
                 {...props}
+                required
             />
         </>
     );
