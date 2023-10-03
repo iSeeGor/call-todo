@@ -1,11 +1,4 @@
-import useLocalStorage from "../hooks/useLocalStorage.js";
-
-function CallTodoList({callList}) {
-    const [call, setCall] = useLocalStorage([], 'call_list');
-
-    const addCall = () => {
-        setCall([...call, {name: 'test', phone: '23432234', time: '00:00'}])
-    }
+const CallTodoList = ({callList}) => {
 
     return (
         <>
@@ -34,8 +27,6 @@ function CallTodoList({callList}) {
                     }
                 </tbody>
             </table>
-
-            <button style={{marginTop: '20px',}} onClick={addCall}>Add</button>
         </>
     );
 }
