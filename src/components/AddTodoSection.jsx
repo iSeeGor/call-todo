@@ -1,11 +1,7 @@
 import Input from "./ui/Input/Input";
 import {useState} from "react";
 
-import useLocalStorage from '../hooks/useLocalStorage.js'
-
-
 const AddTodoSection = ({addCall}) => {
-    const [value, setValue] = useLocalStorage([], 'calltodo');
     const [call, setCall] = useState({
         name: '',
         phone: '',
@@ -16,8 +12,6 @@ const AddTodoSection = ({addCall}) => {
         e.preventDefault();
 
         const data = new FormData(e.target);
-
-        // setValue([...value, Object.fromEntries(data.entries())])
 
         addCall(Object.fromEntries(data.entries()))
     }

@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
 import useLocalStorage from "../hooks/useLocalStorage.js";
 
 function CallTodoList({callList}) {
-    const [call, setCall] = useLocalStorage([], 'calltodo');
+    const [call, setCall] = useLocalStorage([], 'call_list');
 
     const addCall = () => {
         setCall([...call, {name: 'test', phone: '23432234', time: '00:00'}])

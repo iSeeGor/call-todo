@@ -5,7 +5,7 @@ import useLocalStorage from "./hooks/useLocalStorage.js";
 
 function App() {
 
-    const [call, setCall] = useLocalStorage([],'calltodo');
+    const [call, setCall] = useLocalStorage([],'call_list');
 
     const addCall = (el) => {
         setCall([...call, el]);
