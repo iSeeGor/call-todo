@@ -1,3 +1,5 @@
+import TableItem from './Table/TableItem'
+
 const CallTodoList = ({callList}) => {
 
     return (
@@ -16,13 +18,7 @@ const CallTodoList = ({callList}) => {
 
                     {
                         callList.map((item, index) => (
-                           <tr key={index}>
-                               <td>{item.name}</td>
-                               <td>{item.phone}</td>
-                               <td>{item.time}</td>
-                               <td>{item.name}</td>
-                               <td>{item.name}</td>
-                           </tr>
+                            <TableItem key={index} data={item} />
                         ))
                     }
                 </tbody>
