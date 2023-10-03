@@ -9,7 +9,7 @@ const TableItem = ({data}) => {
                 <td>{name}</td>
                 <td>{phone}</td>
                 <td>{time}</td>
-                <td>{time}</td>
+                <td> <a href='#' title='Click to datete call item.'>delete</a> </td>
                 <td>{time}</td>
             </tr>
         </>

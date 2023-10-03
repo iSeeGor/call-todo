@@ -2,18 +2,14 @@ import Input from "./ui/Input/Input";
 import {useState} from "react";
 
 const AddTodoSection = ({addCall}) => {
-    const [call, setCall] = useState({
-        name: '',
-        phone: '',
-        time: ''
-    })
+    const [call, setCall] = useState({})
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        const id = new Date().getTime();
         const data = new FormData(e.target);
 
-        addCall(Object.fromEntries(data.entries()))
+        addCall({id,...Object.fromEntries(data.entries())})
     }
 
     const onChange = (e) => {
