@@ -1,7 +1,13 @@
 import React from 'react';
 
-const TableItem = ({data}) => {
-    const { name, phone, time } = data;
+const TableItem = ({data, delCall}) => {
+    const { name, phone, time, id } = data;
+
+    const delHandle = (e) => {
+        e.preventDefault();
+
+        delCall(id);
+    }
 
     return (
         <>
@@ -9,8 +15,8 @@ const TableItem = ({data}) => {
                 <td>{name}</td>
                 <td>{phone}</td>
                 <td>{time}</td>
-                <td> <a href='#' title='Click to datete call item.'>delete</a> </td>
-                <td>{time}</td>
+                <td> <a href='#' title='Click to datete call item.' onClick={delHandle}>delete</a> </td>
+                <td>{id}</td>
             </tr>
         </>
     );

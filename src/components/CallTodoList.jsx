@@ -1,6 +1,6 @@
 import TableItem from './Table/TableItem'
 
-const CallTodoList = ({callList}) => {
+const CallTodoList = ({callList, delCall}) => {
 
     return (
         <>
@@ -16,11 +16,14 @@ const CallTodoList = ({callList}) => {
                         <th>Finished</th>
                     </tr>
 
-                    {
+                    {callList && callList.length > 0 ? (
                         callList.map((item, index) => (
-                            <TableItem key={index} data={item} />
+                            <TableItem key={index} data={item} delCall={delCall} />
                         ))
-                    }
+                    ) : (
+                        <tr><td colSpan="5" style={{textAlign: 'center'}}>No calls available</td></tr>
+                    )}
+
                 </tbody>
             </table>
         </>

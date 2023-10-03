@@ -2,7 +2,11 @@ import Input from "./ui/Input/Input";
 import {useState} from "react";
 
 const AddTodoSection = ({addCall}) => {
-    const [call, setCall] = useState({})
+    const [call, setCall] = useState({
+        name: '',
+        phone: '',
+        time: ''
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
