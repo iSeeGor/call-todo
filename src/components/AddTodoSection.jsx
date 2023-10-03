@@ -10,7 +10,7 @@ const AddTodoSection = ({addCall}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const id = new Date().getTime();
+        const id = new Date().getTime() + 60000;
         const data = new FormData(e.target);
 
         addCall({id,...Object.fromEntries(data.entries())})
