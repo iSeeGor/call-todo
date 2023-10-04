@@ -1,5 +1,6 @@
 import Input from "./ui/Input/Input";
 import useLocalStorage from "../hooks/useLocalStorage.js";
+import {timeFromTimestamp} from "../helpers/time.js";
 
 const SectionNextCall = () => {
 
@@ -11,7 +12,7 @@ const SectionNextCall = () => {
         let closestDiff = Infinity;
 
         for ( let i = 0; i < callTodos.length; i++ ) {
-            const timestamp = callTodos[i].id;
+            const timestamp = callTodos[i].time;
 
             if ( timestamp > currentTime ) {
                 const diff = timestamp - currentTime;
@@ -58,7 +59,7 @@ const SectionNextCall = () => {
                             type="text"
                             name="time"
                             placeholder="Time"
-                            value={ nextCall ? nextCall.time : '-' }
+                            value={ nextCall ? timeFromTimestamp(nextCall.time) : '-' }
                             readOnly
                         />
                     </div>
