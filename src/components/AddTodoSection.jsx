@@ -13,13 +13,12 @@ const AddTodoSection = ({addCall}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const id = new Date().getTime();
         const data = new FormData(e.target);
         const timestamp = timeToTimestamp(data.get('time'));
 
         data.set('time', timestamp.toString());
 
-        addCall({id,...Object.fromEntries(data.entries())});
+        addCall({...Object.fromEntries(data.entries())});
         setInputField(emptyField);
     }
 

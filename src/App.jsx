@@ -8,12 +8,12 @@ function App() {
 
     const [callTodos, setCallTodos] = useLocalStorage([],'call_list');
 
-    const addCall = (el) => {
-        setCallTodos([...callTodos, el]);
+    const addCall = (callTodo) => {
+        setCallTodos([...callTodos, callTodo]);
     };
 
-    const delCall = ( id ) => {
-        const filteredTodos = callTodos.filter(( obj ) => obj.id !== id);
+    const delCall = ( time ) => {
+        const filteredTodos = callTodos.filter(( obj ) => obj.time !== time);
 
         setCallTodos(filteredTodos);
     }

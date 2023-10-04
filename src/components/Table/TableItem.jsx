@@ -2,17 +2,13 @@ import React from 'react';
 import { timeFromTimestamp } from '../../helpers/time.js'
 
 const TableItem = ({data, delCall}) => {
-    const { name, phone, time, id } = data;
+    const { name, phone, time } = data;
 
     const delHandle = (e) => {
         e.preventDefault();
 
-        delCall(id);
+        delCall(time);
     }
-
-    const checked = new Date().getTime() > id;
-
-    // const
 
     return (
         <>
@@ -21,7 +17,7 @@ const TableItem = ({data, delCall}) => {
                 <td>{phone}</td>
                 <td>{timeFromTimestamp(time)}</td>
                 <td> <a href='#' title='Click to datete call item.' onClick={delHandle}>delete</a> </td>
-                <td><input type="checkbox" disabled checked={checked}/></td>
+                <td><input type="checkbox" disabled checked={new Date().getTime() > time}/></td>
             </tr>
         </>
     );
