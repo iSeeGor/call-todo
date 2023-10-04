@@ -1,5 +1,6 @@
 import Input from "./ui/Input/Input";
 import {useState} from "react";
+import { timeToTimestamp} from '../helpers/time.js'
 
 const AddTodoSection = ({addCall}) => {
     const emptyField = {
@@ -7,12 +8,16 @@ const AddTodoSection = ({addCall}) => {
         phone: '',
         time: ''
     }
-    const [inputField, setInputField] = useState(emptyField)
+    const [inputField, setInputField] = useState(emptyField);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const id = new Date().getTime() + 60000;
+
+        const id = new Date().getTime();
         const data = new FormData(e.target);
+        const timestamp = timeToTimestamp(data.get('time'));
+
+        data.set('time', timestamp.toString());
 
         addCall({id,...Object.fromEntries(data.entries())});
         setInputField(emptyField);
