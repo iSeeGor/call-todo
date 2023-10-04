@@ -2,6 +2,7 @@ import './App.css'
 import AddTodoSection from './components/AddTodoSection';
 import CallTodoList from "./components/CallTodoList.jsx";
 import useLocalStorage from "./hooks/useLocalStorage.js";
+import SectionNextCall from "./components/SectionNextCall.jsx";
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
       <div className="call-todo-header">
           <AddTodoSection addCall={addCall} />
 
-          <AddTodoSection/>
+          <SectionNextCall />
       </div>
 
       <div className="call-todo-body">

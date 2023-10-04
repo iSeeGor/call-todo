@@ -2,22 +2,24 @@ import Input from "./ui/Input/Input";
 import {useState} from "react";
 
 const AddTodoSection = ({addCall}) => {
-    const [call, setCall] = useState({
+    const emptyField = {
         name: '',
         phone: '',
         time: ''
-    })
+    }
+    const [inputField, setInputField] = useState(emptyField)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = new Date().getTime() + 60000;
         const data = new FormData(e.target);
 
-        addCall({id,...Object.fromEntries(data.entries())})
+        addCall({id,...Object.fromEntries(data.entries())});
+        setInputField(emptyField);
     }
 
     const onChange = (e) => {
-        setCall({...call, [e.target.name]: e.target.value});
+        setInputField({...inputField, [e.target.name]: e.target.value});
     }
 
     return (
@@ -33,7 +35,7 @@ const AddTodoSection = ({addCall}) => {
                             type="text"
                             name="name"
                             placeholder="Name"
-                            value={call.name}
+                            value={inputField.name}
                             onChange={onChange}
                         />
 
@@ -41,7 +43,7 @@ const AddTodoSection = ({addCall}) => {
                             type="text"
                             name="phone"
                             placeholder="Phone"
-                            value={call.phone}
+                            value={inputField.phone}
                             onChange={onChange}
                         />
 
@@ -49,7 +51,7 @@ const AddTodoSection = ({addCall}) => {
                             type="time"
                             name="time"
                             placeholder="Time"
-                            value={call.time}
+                            value={inputField.time}
                             onChange={onChange}
                         />
                     </div>
