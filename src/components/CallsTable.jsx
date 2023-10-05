@@ -1,6 +1,6 @@
 import TableItem from './Table/TableItem'
 
-const CallTodoList = ({callList, delCall}) => {
+const CallsTable = ({callList, delCall}) => {
 
     return (
         <>
@@ -30,4 +30,4 @@ const CallTodoList = ({callList, delCall}) => {
     );
 }
 
-export default CallTodoList;
+export default CallsTable;

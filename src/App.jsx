@@ -1,11 +1,11 @@
 import './App.css'
 import AddTodoSection from './components/AddTodoSection';
-import CallTodoList from "./components/CallTodoList.jsx";
+import CallsTable from "./components/CallsTable.jsx";
 import useLocalStorage from "./hooks/useLocalStorage.js";
 import SectionNextCall from "./components/SectionNextCall.jsx";
+import {closestTime} from "./helpers/closestTime.js";
 
 function App() {
-
     const [callTodos, setCallTodos] = useLocalStorage([],'call_list');
 
     const addCall = (callTodo) => {
@@ -18,17 +18,25 @@ function App() {
         setCallTodos(filteredTodos);
     }
 
-  return (
+    function nextCall(data) {
+        const timeData = data.map(obj => obj.time);
+        const nextTime = closestTime(timeData);
 
+        return data.find(obj => obj.time === nextTime);
+    }
+
+
+
+  return (
     <>
       <div className="call-todo-header">
           <AddTodoSection addCall={addCall} />
 
-          <SectionNextCall />
+          <SectionNextCall call={nextCall(callTodos)} />
       </div>
 
       <div className="call-todo-body">
-          <CallTodoList callList={callTodos} delCall={delCall} />
+          <CallsTable callList={callTodos} delCall={delCall} />
       </div>
     </>
   )
