@@ -34,7 +34,7 @@ function App() {
       </div>
 
       <div className="call-todo-body">
-          <CallsTable callList={callTodos} delCall={delCall} />
+          <CallsTable callTodos={callTodos} delCall={delCall} />
       </div>
     </>
   )

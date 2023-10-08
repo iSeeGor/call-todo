@@ -1,8 +1,12 @@
 import TableItem from './Table/TableItem'
 import ButtonSort from "./ui/ButtonSort/ButtonSort.jsx";
 import Button from "./ui/Button/Button.jsx";
+import {useEffect, useState} from "react";
 
-const CallsTable = ({callList, delCall}) => {
+const CallsTable = ({callTodos, delCall}) => {
+
+    const [filter, setFilter] = useState('all');
+    const [filteredCalls, setFilteredCalls] = useState();
 
     const buttons = [
         {
@@ -19,9 +23,26 @@ const CallsTable = ({callList, delCall}) => {
         },
     ]
 
-    const getFilterName = (name) => {
-        return name;
+    const filterCalls = () => {
+        let calls = callTodos;
+        const currentTime = new Date().getTime();
+
+        console.log(filter)
+
+        if ( 'next' === filter ) {
+            calls = callTodos.filter(obj => obj.time > currentTime);
+        }
+
+        if ( 'finished' === filter ) {
+            calls = callTodos.filter(obj => obj.time < currentTime);
+        }
+
+        return calls;
     }
+
+    useEffect(() => {
+        setFilteredCalls(filterCalls());
+    }, [filter, callTodos]);
 
     return (
         <>
@@ -39,8 +60,8 @@ const CallsTable = ({callList, delCall}) => {
                         <th>Finished</th>
                     </tr>
 
-                    {callList && callList.length > 0 ? (
-                        callList.map((item, index) => (
+                    {filteredCalls && filteredCalls.length > 0 ? (
+                        filteredCalls.map((item, index) => (
                             <TableItem key={index} data={item} delCall={delCall} />
                         ))
                     ) : (
@@ -55,7 +76,7 @@ const CallsTable = ({callList, delCall}) => {
                     buttons.map( (button, i) => {
                         return <Button
                             key={i}
-                            getFilterName={getFilterName}
+                            onClick={setFilter}
                             filterName={button.name}
                             buttonVariant="outline"
                             type="button"
