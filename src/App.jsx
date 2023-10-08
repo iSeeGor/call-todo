@@ -3,10 +3,12 @@ import AddTodoSection from './components/AddTodoSection';
 import CallsTable from "./components/CallsTable.jsx";
 import useLocalStorage from "./hooks/useLocalStorage.js";
 import SectionNextCall from "./components/SectionNextCall.jsx";
-import {closestTime} from "./helpers/closestTime.js";
+import {closestTime as getClosestTime} from "./helpers/closestTime.js";
+import {useEffect, useState} from "react";
 
 function App() {
     const [callTodos, setCallTodos] = useLocalStorage([],'call_list');
+    const [nextCall, setNextCall] = useState(null);
 
     const addCall = (callTodo) => {
         setCallTodos([...callTodos, callTodo]);
@@ -18,19 +20,31 @@ function App() {
         setCallTodos(filteredTodos);
     }
 
-    function nextCall(data) {
-        const timeData = data.map(obj => obj.time);
-        const nextTime = closestTime(timeData);
+    const getNextCall = () => {
+        const timestampArray = callTodos.map(obj => obj.time);
+        const closestTime = getClosestTime(timestampArray);
 
-        return data.find(obj => obj.time === nextTime);
+        return callTodos.find(obj => obj.time === closestTime);
     }
+
+    useEffect(() => {
+        setNextCall(getNextCall());
+
+        const interval = setInterval(() => {
+            setNextCall(getNextCall());
+        }, 60000);
+
+        return () => {
+            clearInterval( interval );
+        }
+    }, [callTodos])
 
   return (
     <>
       <div className="call-todo-header">
           <AddTodoSection addCall={addCall} />
 
-          <SectionNextCall call={nextCall(callTodos)} />
+          <SectionNextCall call={nextCall} />
       </div>
 
       <div className="call-todo-body">

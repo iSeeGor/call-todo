@@ -1,4 +1,3 @@
-import React from 'react';
 import { timeFromTimestamp } from '../../helpers/time.js'
 
 const TableItem = ({data, delCall}) => {
