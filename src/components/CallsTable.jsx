@@ -1,4 +1,5 @@
 import TableItem from './Table/TableItem'
+import ButtonSort from "./ui/ButtonSort/ButtonSort.jsx";
 
 const CallsTable = ({callList, delCall}) => {
 
@@ -9,9 +10,11 @@ const CallsTable = ({callList, delCall}) => {
             <table className="table">
                 <tbody>
                     <tr>
-                        <th>Name</th>
+                        <th>
+                            <ButtonSort>Name</ButtonSort>
+                        </th>
                         <th>Phone</th>
-                        <th>Time</th>
+                        <th><ButtonSort>Time</ButtonSort></th>
                         <th>Action</th>
                         <th>Finished</th>
                     </tr>

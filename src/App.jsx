@@ -25,8 +25,6 @@ function App() {
         return data.find(obj => obj.time === nextTime);
     }
 
-
-
   return (
     <>
       <div className="call-todo-header">
