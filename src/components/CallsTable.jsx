@@ -1,5 +1,6 @@
 import TableItem from './Table/TableItem'
 import ButtonSort from "./ui/ButtonSort/ButtonSort.jsx";
+import Button from "./ui/Button/Button.jsx";
 
 const CallsTable = ({callList, delCall}) => {
 
@@ -29,6 +30,12 @@ const CallsTable = ({callList, delCall}) => {
 
                 </tbody>
             </table>
+            
+            <div className="table-control">
+                <Button buttonVariant="outline" type="button">All</Button>
+                <Button buttonVariant="outline" type="button">Next</Button>
+                <Button buttonVariant="outline" type="button">Finished</Button>
+            </div>
         </>
     );
 }
