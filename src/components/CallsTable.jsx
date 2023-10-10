@@ -7,6 +7,11 @@ const CallsTable = ({callTodos, delCall}) => {
 
     const [filter, setFilter] = useState('all');
     const [filteredCalls, setFilteredCalls] = useState();
+    const [activeButton, setActiveButton] = useState('');
+
+    const activeButtonHandler = (name) => {
+        setActiveButton(name);
+    }
 
     const buttons = [
         {
@@ -26,8 +31,6 @@ const CallsTable = ({callTodos, delCall}) => {
     const filterCalls = () => {
         let calls = callTodos;
         const currentTime = new Date().getTime();
-
-        console.log(filter)
 
         if ( 'next' === filter ) {
             calls = callTodos.filter(obj => obj.time > currentTime);
@@ -77,9 +80,11 @@ const CallsTable = ({callTodos, delCall}) => {
                         return <Button
                             key={i}
                             onClick={setFilter}
+                            buttonHandler={activeButtonHandler}
                             filterName={button.name}
                             buttonVariant="outline"
                             type="button"
+                            isActive={activeButton === button.name}
                         >
                             {button.title}
                         </Button>
