@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import classes from './ButtonSort.module.css';
 
-const ButtonSort = ({children, sortby}) => {
-    const [sort, useSort] = useState(sortby);
+const ButtonSort = ({children, sortby, setSorting}) => {
+    const [order, setOrder] = useState();
 
     const arrows = {
         asc: '\u2BC5',
@@ -10,16 +10,16 @@ const ButtonSort = ({children, sortby}) => {
     };
 
 
-    function handleSorting(){
+    function handleOrdering(){
         let srt = 'asc';
 
-        if ( ! sort ) {
+        if ( ! order ) {
             srt = 'asc';
-        } else if ( sort === 'asc' ) {
+        } else if ( order === 'asc' ) {
             srt = 'dsc';
         }
 
-        useSort(srt)
+        setOrder(srt)
     }
 
     return (
@@ -27,12 +27,15 @@ const ButtonSort = ({children, sortby}) => {
          <button
              type="button"
              className={classes.ButtonSort}
-             onClick={() => handleSorting()}
+             onClick={() => {
+                 handleOrdering();
+                 setSorting((prev) => ({...prev, sortby: sortby, ord: order}));
+             }}
          >
              {children}
 
                  {
-                     sort ? arrows[sort] : ' '
+                     order ? arrows[order] : ' '
                  }
          </button>
         </>
