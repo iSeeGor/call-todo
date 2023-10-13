@@ -1,6 +1,6 @@
 import classes from "./Button.module.css";
 
-const Button = ({children, buttonVariant, filterName, onClick, buttonHandler, isActive, ...attr}) => {
+const Button = ({children, buttonVariant, onClick, isActive, filterName, ...attr}) => {
     const variant = buttonVariant ? buttonVariant : 'default';
 
     return (
@@ -8,8 +8,9 @@ const Button = ({children, buttonVariant, filterName, onClick, buttonHandler, is
          <button
              className={`${classes.Button} ${classes['Button__' + variant]} ${isActive ? classes.active : ''}`}
              onClick={() => {
-                 onClick(filterName);
-                 buttonHandler(filterName);
+                 onClick({
+                    'filter': filterName,
+                 })
              }}
              {...attr}
          >

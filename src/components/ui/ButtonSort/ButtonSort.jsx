@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import classes from './ButtonSort.module.css';
 
-const ButtonSort = ({children, sortby, setSorting}) => {
+const ButtonSort = ({children, sortby, onClick}) => {
     const [order, setOrder] = useState();
 
     const arrows = {
@@ -28,8 +28,10 @@ const ButtonSort = ({children, sortby, setSorting}) => {
              type="button"
              className={classes.ButtonSort}
              onClick={() => {
-                 handleOrdering();
-                 setSorting((prev) => ({...prev, sortby: sortby, ord: order}));
+                 onClick({
+                     sortby: sortby
+                 });
+                 // setSorting((prev) => ({...prev, sortby: sortby, ord: order}));
              }}
          >
              {children}

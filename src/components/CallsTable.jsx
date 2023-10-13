@@ -2,9 +2,10 @@ import TableItem from './Table/TableItem'
 import ButtonSort from "./ui/ButtonSort/ButtonSort.jsx";
 import Button from "./ui/Button/Button.jsx";
 import {useEffect, useState} from "react";
-import {timeToTimestamp} from "../helpers/time.js";
+import {useQuery} from "../helpers/useQuery.js";
 
 const CallsTable = ({callTodos, delCall}) => {
+
 
     const [filter, setFilter] = useState('all');
     const [filteredCalls, setFilteredCalls] = useState();
@@ -13,6 +14,18 @@ const CallsTable = ({callTodos, delCall}) => {
         sortby: 'default',
         ord: 'asc'
     });
+    const [opt, setOpt] = useState({});
+
+    const [sortedTodos, options] = useQuery(callTodos, opt);
+
+    const filterButtonHandler = (data) => {
+        setOpt({filter: data.filter})
+    }
+
+    const sortButtonHandler = (data) => {
+        const order = opt.order === 'asc' ? 'desc' : 'asc';
+        setOpt({sortby: data.sortby, order: order})
+    }
 
     const activeButtonHandler = (name) => {
         setActiveButton(name);
@@ -53,7 +66,7 @@ const CallsTable = ({callTodos, delCall}) => {
         const {sortby} = sorting;
         const {ord} = sorting;
 
-        console.log(sorting);
+        // console.log(sorting);
 
         if ( 'default' === sortby ) return;
 
@@ -104,6 +117,8 @@ const CallsTable = ({callTodos, delCall}) => {
     useEffect(() => {
         setFilteredCalls(filterCalls());
 
+        // setQueriedCalls(callTodos);
+
         if ( sortingCalls() ) {
             setFilteredCalls(sortingCalls());
         }
@@ -120,17 +135,17 @@ const CallsTable = ({callTodos, delCall}) => {
                         <th>
                             <ButtonSort
                                 sortby="name"
-                                setSorting={setSorting}
+                                onClick={sortButtonHandler}
                             >Name</ButtonSort>
                         </th>
                         <th>Phone</th>
-                        <th><ButtonSort sortby="time" setSorting={setSorting}>Time</ButtonSort></th>
+                        <th><ButtonSort sortby="time" onClick={sortButtonHandler}>Time</ButtonSort></th>
                         <th>Action</th>
                         <th>Finished</th>
                     </tr>
 
-                    {filteredCalls && filteredCalls.length > 0 ? (
-                        filteredCalls.map((item, index) => (
+                    {sortedTodos && sortedTodos.length > 0 ? (
+                        sortedTodos.map((item, index) => (
                             <TableItem key={index} data={item} delCall={delCall} />
                         ))
                     ) : (
@@ -145,12 +160,11 @@ const CallsTable = ({callTodos, delCall}) => {
                     buttons.map( (button, i) => {
                         return <Button
                             key={i}
-                            onClick={setFilter}
-                            buttonHandler={activeButtonHandler}
+                            onClick={filterButtonHandler}
                             filterName={button.name}
                             buttonVariant="outline"
                             type="button"
-                            isActive={activeButton === button.name}
+                            isActive={opt.filter === button.name}
                         >
                             {button.title}
                         </Button>
