@@ -14,17 +14,17 @@ const CallsTable = ({callTodos, delCall}) => {
         sortby: 'default',
         ord: 'asc'
     });
-    const [opt, setOpt] = useState({});
+    const [options, setOptions] = useState({});
 
-    const [sortedTodos, options] = useQuery(callTodos, opt);
+    const [sortedTodos, d] = useQuery(callTodos, options);
 
     const filterButtonHandler = (data) => {
-        setOpt({filter: data.filter})
+        setOptions({filter: data.filter})
     }
 
     const sortButtonHandler = (data) => {
-        const order = opt.order === 'asc' ? 'desc' : 'asc';
-        setOpt({sortby: data.sortby, order: order})
+        const order = options.order === 'asc' ? 'desc' : 'asc';
+        setOptions({sortby: data.sortby, order: order})
     }
 
     const activeButtonHandler = (name) => {
@@ -135,11 +135,13 @@ const CallsTable = ({callTodos, delCall}) => {
                         <th>
                             <ButtonSort
                                 sortby="name"
+                                icon={options.order}
+                                isActive={options.sortby === 'name'}
                                 onClick={sortButtonHandler}
                             >Name</ButtonSort>
                         </th>
                         <th>Phone</th>
-                        <th><ButtonSort sortby="time" onClick={sortButtonHandler}>Time</ButtonSort></th>
+                        <th><ButtonSort sortby="time" icon={options.order} onClick={sortButtonHandler} isActive={options.sortby === 'time'}>Time</ButtonSort></th>
                         <th>Action</th>
                         <th>Finished</th>
                     </tr>
@@ -164,7 +166,7 @@ const CallsTable = ({callTodos, delCall}) => {
                             filterName={button.name}
                             buttonVariant="outline"
                             type="button"
-                            isActive={opt.filter === button.name}
+                            isActive={options.filter === button.name}
                         >
                             {button.title}
                         </Button>
