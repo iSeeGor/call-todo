@@ -1,19 +1,11 @@
 import TableItem from './Table/TableItem'
 import ButtonSort from "./ui/ButtonSort/ButtonSort.jsx";
 import Button from "./ui/Button/Button.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useQuery} from "../helpers/useQuery.js";
 
 const CallsTable = ({callTodos, delCall}) => {
 
-
-    const [filter, setFilter] = useState('all');
-    const [filteredCalls, setFilteredCalls] = useState();
-    const [activeButton, setActiveButton] = useState('');
-    const [sorting, setSorting] = useState({
-        sortby: 'default',
-        ord: 'asc'
-    });
     const [options, setOptions] = useState({});
 
     const [sortedTodos, d] = useQuery(callTodos, options);
@@ -25,10 +17,6 @@ const CallsTable = ({callTodos, delCall}) => {
     const sortButtonHandler = (data) => {
         const order = options.order === 'asc' ? 'desc' : 'asc';
         setOptions({sortby: data.sortby, order: order})
-    }
-
-    const activeButtonHandler = (name) => {
-        setActiveButton(name);
     }
 
     const buttons = [
@@ -45,85 +33,6 @@ const CallsTable = ({callTodos, delCall}) => {
             title: 'Finished'
         },
     ]
-
-    const filterCalls = () => {
-        let calls = callTodos;
-        const currentTime = new Date().getTime();
-
-        if ( 'next' === filter ) {
-            calls = callTodos.filter(obj => obj.time > currentTime);
-        }
-
-        if ( 'finished' === filter ) {
-            calls = callTodos.filter(obj => obj.time < currentTime);
-        }
-
-        return calls;
-    }
-
-    const sortingCalls = () => {
-        let calls;
-        const {sortby} = sorting;
-        const {ord} = sorting;
-
-        // console.log(sorting);
-
-        if ( 'default' === sortby ) return;
-
-        if ( 'name' === sortby ) {
-            calls = filteredCalls.slice();
-
-            calls.sort((a,b) => {
-                const nameA = a.name.toLowerCase();
-                const nameB = b.name.toLowerCase();
-
-                if ( ord === 'asc' ) {
-                    if (nameA < nameB) {
-                        return -1;
-                    }
-                    if (nameA > nameB) {
-                        return 1;
-                    }
-                } else {
-                    if (nameA > nameB) {
-                        return -1;
-                    }
-                    if (nameA < nameB) {
-                        return 1;
-                    }
-                }
-
-
-                return 0;
-            })
-        }
-
-        if ( 'time' === sortby ) {
-            calls = filteredCalls.slice();
-
-            console.log(calls)
-
-            calls.sort((a,b) => {
-                const A = a.time;
-                const B = b.time;
-
-                return ord === 'asc' ? A - B : B - A;
-            })
-        }
-
-        return calls;
-    }
-
-    useEffect(() => {
-        setFilteredCalls(filterCalls());
-
-        // setQueriedCalls(callTodos);
-
-        if ( sortingCalls() ) {
-            setFilteredCalls(sortingCalls());
-        }
-
-    }, [filter, callTodos, sorting]);
 
     return (
         <>
