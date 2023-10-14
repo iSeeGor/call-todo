@@ -5,13 +5,13 @@ const SectionNextCall = ({call}) => {
 
     return (
         <>
-            <section className="app-section">
+            <section className="app-section app-section--nextcall">
                 <header className="app-section__header">
                     <h2 className="app-section__title">Next Call</h2>
                 </header>
 
-                <form className="add-call">
-                    <div className="add-call__body">
+                <form className="call-todo-form">
+                    <div className="call-todo-form__body">
                         <Input
                             type="text"
                             name="name"

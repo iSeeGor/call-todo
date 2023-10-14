@@ -2,7 +2,7 @@ import Input from "./ui/Input/Input";
 import {useState} from "react";
 import { timeToTimestamp} from '../helpers/time.js'
 
-const AddTodoSection = ({addCall}) => {
+const SectionAddCall = ({addCall}) => {
     const emptyField = {
         name: '',
         phone: '',
@@ -33,8 +33,8 @@ const AddTodoSection = ({addCall}) => {
                     <h2 className="app-section__title">Add Call</h2>
                 </header>
 
-                <form className="add-call" onSubmit={handleSubmit}>
-                    <div className="add-call__body">
+                <form className="call-todo-form" onSubmit={handleSubmit}>
+                    <div className="call-todo-form__body">
                         <Input
                             type="text"
                             name="name"
@@ -60,7 +60,7 @@ const AddTodoSection = ({addCall}) => {
                         />
                     </div>
 
-                    <div className="add-call__footer">
+                    <div className="call-todo-form__footer">
                         <button
                             type="submit"
                             className="button"
@@ -72,4 +72,4 @@ const AddTodoSection = ({addCall}) => {
     )
 };
 
-export default AddTodoSection;
+export default SectionAddCall;

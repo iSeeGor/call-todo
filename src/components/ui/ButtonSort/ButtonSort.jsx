@@ -16,7 +16,6 @@ const ButtonSort = ({children, sortby, icon, isActive, onClick}) => {
                  onClick({
                      sortby: sortby
                  });
-                 // setSorting((prev) => ({...prev, sortby: sortby, ord: order}));
              }}
          >
              {children}

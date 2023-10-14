@@ -27,3 +27,7 @@
 .Input:focus::placeholder {
     opacity: 0;
 }
+
+.Input:read-only {
+    background-color: #efefef;
+}

@@ -1,10 +1,10 @@
 import './App.css'
-import AddTodoSection from './components/AddTodoSection';
-import CallsTable from "./components/CallsTable.jsx";
-import useLocalStorage from "./hooks/useLocalStorage.js";
-import SectionNextCall from "./components/SectionNextCall.jsx";
-import {closestTime as getClosestTime} from "./helpers/closestTime.js";
 import {useEffect, useState} from "react";
+import {closestTime as getClosestTime} from "./helpers/closestTime.js";
+import useLocalStorage from "./hooks/useLocalStorage.js";
+import SectionAddCall from './components/SectionAddCall.jsx';
+import SectionNextCall from "./components/SectionNextCall.jsx";
+import CallsTable from "./components/CallsTable.jsx";
 
 function App() {
     const [callTodos, setCallTodos] = useLocalStorage([],'call_list');
@@ -41,15 +41,17 @@ function App() {
 
   return (
     <>
-      <div className="call-todo-header">
-          <AddTodoSection addCall={addCall} />
+        <div className="call-todo-app">
+            <aside className="call-todo-app__aside">
+                <SectionNextCall call={nextCall} />
+            </aside>
 
-          <SectionNextCall call={nextCall} />
-      </div>
+            <main className="call-todo-app__main">
+                <SectionAddCall addCall={addCall} />
 
-      <div className="call-todo-body">
-          <CallsTable callTodos={callTodos} delCall={delCall} />
-      </div>
+                <CallsTable callTodos={callTodos} delCall={delCall} />
+            </main>
+        </div>
     </>
   )
 }

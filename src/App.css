@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 #root {
   max-width: 1200px;
   width: 100%;
@@ -5,11 +9,16 @@
   padding:0 1rem 2rem;
 }
 
-.call-todo-header {
+.call-todo-app {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-  padding: 2rem 0;
+  padding: 32px 0;
+}
+
+.call-todo-app__main {
+  display: grid;
+  gap: 32px;
 }
 
 .app-section {
@@ -18,27 +27,35 @@
   border-radius: 8px;
 }
 
-.app-section__header {
+.app-section--nextcall {
+  padding-bottom: 2rem;
+}
+
+.app-section__header,
+.section__header
+{
   margin-bottom: 1rem;
 }
 
-.app-section__title {
+.app-section__title,
+.section__title{
   font-size: 20px;
   line-height: 1.65;
   margin-bottom: 0;
 }
 
-.add-call {
+.call-todo-form {
   display: grid;
   gap: 1.5rem;
 }
 
-.add-call__body {
-  display: flex;
+.call-todo-form__body {
+  display: grid;
   gap: 1rem;
+  grid-template-columns: 1fr 1fr 120px;
 }
 
-.add-call__footer{
+.call-todo-form__footer{
   display: flex;
   justify-content: flex-end;
 }
