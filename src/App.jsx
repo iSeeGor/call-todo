@@ -27,6 +27,17 @@ function App() {
         return callTodos.find(obj => obj.time === closestTime);
     }
 
+    const removeOldCalls = () => {
+        let actualCalls;
+        const currentDate = new Date();
+        const dayStartTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDay()).getTime() / 1000;
+
+        actualCalls = callTodos.filter( ( obj ) => {
+            const callTime = Math.floor( parseInt(obj.time, 10) / 1000 );
+            return callTime > dayStartTime
+        } );
+    }
+
     useEffect(() => {
         setNextCall(getNextCall());
 
