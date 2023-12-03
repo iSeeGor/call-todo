@@ -55,7 +55,7 @@ const SectionAddCall = ({addCall}) => {
                             type="text"
                             name="phone"
                             placeholder="Phone"
-                            pattern="^(00|\+)\d{2}\([\d]{6,8}\)\d{2,4}|\+[\d]{10,12}$"
+                            pattern="^(\+|00)(\(?\d{3}\)?-?)(\s?\d{3}){3}$"
                             errorMessage="Enter a valid phone number"
                             value={inputField.phone}
                             onChange={onChange}
