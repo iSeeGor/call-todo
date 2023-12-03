@@ -10,6 +10,11 @@ const SectionAddCall = ({addCall}) => {
     }
     const [inputField, setInputField] = useState(emptyField);
 
+    const handleInvalid = (event) => {
+        event.preventDefault();
+        // console.log(event)
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -34,7 +39,7 @@ const SectionAddCall = ({addCall}) => {
                     <h2 className="app-section__title">Add Call</h2>
                 </header>
 
-                <form className="call-todo-form" onSubmit={handleSubmit}>
+                <form className="call-todo-form" onSubmit={handleSubmit} onInvalid={handleInvalid}>
                     <div className="call-todo-form__body">
                         <Input
                             type="text"
