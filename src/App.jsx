@@ -7,6 +7,15 @@ import SectionNextCall from "./components/SectionNextCall.jsx";
 import CallsTable from "./components/CallsTable.jsx";
 
 function App() {
+    // document.addEventListener('invalid', (function(){
+    //     return function(e) {
+    //         //prevent the browser from showing default error bubble / hint
+    //         e.preventDefault();
+    //         // optionally fire off some custom validation handler
+    //         // myValidation();
+    //     };
+    // })(), true);
+
     const [callTodos, setCallTodos] = useLocalStorage([],'call_list');
     const [nextCall, setNextCall] = useState(null);
 
