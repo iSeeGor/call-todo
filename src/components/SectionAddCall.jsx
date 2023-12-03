@@ -19,6 +19,7 @@ const SectionAddCall = ({addCall}) => {
         data.set('time', timestamp.toString());
 
         addCall({...Object.fromEntries(data.entries())});
+
         setInputField(emptyField);
     }
 
@@ -39,6 +40,8 @@ const SectionAddCall = ({addCall}) => {
                             type="text"
                             name="name"
                             placeholder="Name"
+                            pattern="^[A-Za-z0-9]{3,30}$"
+                            errorMessage="Name should be 3-30 characters"
                             value={inputField.name}
                             onChange={onChange}
                         />
@@ -47,6 +50,8 @@ const SectionAddCall = ({addCall}) => {
                             type="text"
                             name="phone"
                             placeholder="Phone"
+                            pattern="^(00|\+)\d{2}\([\d]{6,8}\)\d{2,4}|\+[\d]{10,12}$"
+                            errorMessage="Enter a valid phone number"
                             value={inputField.phone}
                             onChange={onChange}
                         />
@@ -55,6 +60,7 @@ const SectionAddCall = ({addCall}) => {
                             type="time"
                             name="time"
                             placeholder="Time"
+                            errorMessage="Chouse a time"
                             value={inputField.time}
                             onChange={onChange}
                         />
