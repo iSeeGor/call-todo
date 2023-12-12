@@ -1,6 +1,7 @@
 import Input from "./ui/Input/Input";
 import {useState} from "react";
 import { timeToTimestamp} from '../helpers/time.js'
+import { preparePhone } from "../helpers/preparePhone";
 
 const SectionAddCall = ({addCall}) => {
     const emptyField = {
@@ -20,8 +21,11 @@ const SectionAddCall = ({addCall}) => {
 
         const data = new FormData(e.target);
         const timestamp = timeToTimestamp(data.get('time'));
+        const phone = data.get('phone');
+
 
         data.set('time', timestamp.toString());
+        data.set('phone', preparePhone(phone));
 
         addCall({...Object.fromEntries(data.entries())});
 
