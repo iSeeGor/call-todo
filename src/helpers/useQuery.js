@@ -3,8 +3,8 @@ export const useQuery = (data, options) => {
     const timeNow = new Date().getTime();
 
     const defaults = {
-        'sortby' : '',
-        'order' : '',
+        'sortby' : 'time',
+        'order' : 'asc',
         'filter' : 'all'
     }
     options = { ...defaults, ...options }

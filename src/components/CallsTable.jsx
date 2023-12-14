@@ -8,7 +8,7 @@ const CallsTable = ({callTodos, delCall}) => {
 
     const [options, setOptions] = useState({});
 
-    const [sortedTodos, opt] = useQuery(callTodos, options);
+    const [sortedTodos] = useQuery(callTodos, options);
 
     const filterButtonHandler = (data) => {
         setOptions({filter: data.filter})
