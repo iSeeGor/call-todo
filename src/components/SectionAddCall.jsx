@@ -46,9 +46,10 @@ const SectionAddCall = ({addCall}) => {
                 <form className="call-todo-form" onSubmit={handleSubmit} onInvalid={handleInvalid}>
                     <div className="call-todo-form__body">
                         <Input
+                            label="Name"
                             type="text"
                             name="name"
-                            placeholder="Name"
+                            placeholder="John"
                             pattern="^[A-Za-z0-9]{3,30}$"
                             errorMessage="Name should be 3-30 characters"
                             value={inputField.name}
@@ -56,9 +57,10 @@ const SectionAddCall = ({addCall}) => {
                         />
 
                         <Input
+                            label="Phone"
                             type="text"
                             name="phone"
-                            placeholder="Phone"
+                            placeholder="+x(xxx)xxx xxx xxx"
                             pattern="^(\+|00)(\(?\d{3}\)?-?)(\s?\d{3}){3}$"
                             errorMessage="Enter a valid phone number"
                             value={inputField.phone}
@@ -66,6 +68,7 @@ const SectionAddCall = ({addCall}) => {
                         />
 
                         <Input
+                            label="Time"
                             type="time"
                             name="time"
                             placeholder="Time"

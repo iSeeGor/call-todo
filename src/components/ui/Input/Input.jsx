@@ -1,7 +1,7 @@
 import classes from './Input.module.css'
 import {useState} from "react";
 
-const Input = ({errorMessage, onChange, ...attrs}) => {
+const Input = ({errorMessage, onChange, label,  ...attrs}) => {
 
     const [errorMsg, setErrorMsg] = useState('');
     const [invalid, setInvalid] = useState(false);
@@ -18,9 +18,15 @@ const Input = ({errorMessage, onChange, ...attrs}) => {
         }
     }
 
+    console.log({...attrs});
+
     return (
         <>
             <div className={classes.InputField}>
+                {
+                    label && <label className={classes.InputLabel}>{label}</label>
+                }
+
                 <input
                     className={`${classes.Input} ${invalid ? classes.invalid : ''}`}
                     // focused={focused.toString()}
