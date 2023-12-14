@@ -3,12 +3,13 @@ import ButtonSort from "./ui/ButtonSort/ButtonSort.jsx";
 import Button from "./ui/Button/Button.jsx";
 import {useState} from "react";
 import {useQuery} from "../helpers/useQuery.js";
+import { useEffect } from 'react';
 
 const CallsTable = ({callTodos, delCall}) => {
 
     const [options, setOptions] = useState({});
 
-    const [sortedTodos] = useQuery(callTodos, options);
+    const [sortedTodos, sortOptions] = useQuery(callTodos, options);
 
     const filterButtonHandler = (data) => {
         setOptions({filter: data.filter})
@@ -33,7 +34,11 @@ const CallsTable = ({callTodos, delCall}) => {
             name: 'finished',
             title: 'Finished'
         },
-    ]
+    ];
+
+    useEffect(() => {
+        setOptions(sortOptions);
+    }, []);
 
     return (
         <>
