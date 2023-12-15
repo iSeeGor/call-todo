@@ -1,23 +1,12 @@
 import './App.css'
-import {useEffect, useState} from "react";
-import {closestTime as getClosestTime} from "./helpers/closestTime.js";
 import useLocalStorage from "./hooks/useLocalStorage.js";
 import SectionAddCall from './components/SectionAddCall.jsx';
 import SectionNextCall from "./components/SectionNextCall.jsx";
 import CallsTable from "./components/CallsTable.jsx";
 
 function App() {
-    // document.addEventListener('invalid', (function(){
-    //     return function(e) {
-    //         //prevent the browser from showing default error bubble / hint
-    //         e.preventDefault();
-    //         // optionally fire off some custom validation handler
-    //         // myValidation();
-    //     };
-    // })(), true);
-
-    const [callTodos, setCallTodos] = useLocalStorage([],'call_list');
-    const [nextCall, setNextCall] = useState(null);
+    const [callTodos, setCallTodos] = useLocalStorage([],'callTodos');
+   
 
     const addCall = (callTodo) => {
         setCallTodos([...callTodos, callTodo]);
@@ -27,13 +16,6 @@ function App() {
         const filteredTodos = callTodos.filter(( obj ) => obj.time !== time);
 
         setCallTodos(filteredTodos);
-    }
-
-    const getNextCall = () => {
-        const timestampArray = callTodos.map(obj => obj.time);
-        const closestTime = getClosestTime(timestampArray);
-
-        return callTodos.find(obj => obj.time === closestTime);
     }
 
     const removeOldCalls = () => {
@@ -47,23 +29,12 @@ function App() {
         } );
     }
 
-    useEffect(() => {
-        setNextCall(getNextCall());
-
-        const interval = setInterval(() => {
-            setNextCall(getNextCall());
-        }, 60000);
-
-        return () => {
-            clearInterval( interval );
-        }
-    }, [callTodos])
 
   return (
     <>
         <div className="call-todo-app">
             <aside className="call-todo-app__aside">
-                <SectionNextCall call={nextCall} />
+                <SectionNextCall callTodos={callTodos} />
             </aside>
 
             <main className="call-todo-app__main">

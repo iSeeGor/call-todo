@@ -1,7 +1,29 @@
+import {useEffect, useState} from "react";
 import Input from "./ui/Input/Input";
 import {timeFromTimestamp} from "../helpers/time.js";
+import {closestTime as getClosestTime} from "../helpers/closestTime.js";
 
-const SectionNextCall = ({call}) => {
+const SectionNextCall = ({callTodos}) => {
+    const [nextCall, setNextCall] = useState(null);
+
+    const prepareNextCall = () => {
+        const timestampArray = callTodos.map(obj => obj.time);
+        const closestTime = getClosestTime(timestampArray);
+
+        return callTodos.find(obj => obj.time === closestTime);
+    }
+
+    useEffect(() => {
+        setNextCall(prepareNextCall());
+
+        const interval = setInterval(() => {
+            setNextCall(prepareNextCall());
+        }, 30000);
+
+        return () => {
+            clearInterval( interval );
+        }
+    }, [callTodos])
 
     return (
         <>
@@ -17,7 +39,7 @@ const SectionNextCall = ({call}) => {
                             type="text"
                             name="name"
                             placeholder="Name"
-                            value={ call ? call.name : '-' }
+                            value={ nextCall ? nextCall.name : '-' }
                             readOnly
                         />
 
@@ -26,7 +48,7 @@ const SectionNextCall = ({call}) => {
                             type="text"
                             name="phone"
                             placeholder="Phone"
-                            value={ call ? call.phone : '-' }
+                            value={ nextCall ? nextCall.phone : '-' }
                             readOnly
                         />
 
@@ -35,7 +57,7 @@ const SectionNextCall = ({call}) => {
                             type="text"
                             name="time"
                             placeholder="Time"
-                            value={ call ? timeFromTimestamp(call.time) : '-' }
+                            value={ nextCall ? timeFromTimestamp(nextCall.time) : '-' }
                             readOnly
                         />
                     </div>
