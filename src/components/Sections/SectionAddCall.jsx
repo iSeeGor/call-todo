@@ -1,7 +1,7 @@
-import Input from "./ui/Input/Input";
+import Input from "../ui/Input/Input";
 import {useState} from "react";
-import { timeToTimestamp} from '../helpers/time.js'
-import { preparePhone } from "../helpers/preparePhone";
+import { timeToTimestamp} from '../../helpers/time.js'
+import { preparePhone } from "../../helpers/preparePhone";
 
 const SectionAddCall = ({addCall}) => {
     const emptyField = {

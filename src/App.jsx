@@ -1,7 +1,7 @@
 import './App.css'
 import useLocalStorage from "./hooks/useLocalStorage.js";
-import SectionAddCall from './components/SectionAddCall.jsx';
-import SectionNextCall from "./components/SectionNextCall.jsx";
+import SectionAddCall from './components/Sections/SectionAddCall';
+import SectionNextCall from "./components/Sections/SectionNextCall";
 import CallsTable from "./components/CallsTable.jsx";
 
 function App() {

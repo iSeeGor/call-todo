@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import Input from "./ui/Input/Input";
-import {timeFromTimestamp} from "../helpers/time.js";
-import {closestTime as getClosestTime} from "../helpers/closestTime.js";
+import Input from "../ui/Input/Input";
+import {timeFromTimestamp} from "../../helpers/time.js";
+import {closestTime as getClosestTime} from "../../helpers/closestTime.js";
 
 const SectionNextCall = ({callTodos}) => {
     const [nextCall, setNextCall] = useState(null);
