@@ -18,8 +18,6 @@ const Input = ({errorMessage, onChange, label,  ...attrs}) => {
         }
     }
 
-    console.log({...attrs});
-
     return (
         <>
             <div className={classes.InputField}>
