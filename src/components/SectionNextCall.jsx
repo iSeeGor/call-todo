@@ -25,6 +25,24 @@ const SectionNextCall = ({callTodos}) => {
         }
     }, [callTodos])
 
+    const inputs = [
+        {
+            label:"Name",
+            name:"name",
+            type:"text",
+        },
+        {
+            label:"Phone",
+            name:"phone",
+            type:"text",
+        },
+        {
+            label:"Time",
+            name:"time",
+            type:"text",
+        }, 
+    ]
+
     return (
         <>
             <section className="app-section app-section--nextcall" style={{'paddingBottom':'75px'}}>
@@ -34,32 +52,21 @@ const SectionNextCall = ({callTodos}) => {
 
                 <form className="call-todo-form">
                     <div className="call-todo-form__body">
-                        <Input
-                            label="Name"
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            value={ nextCall ? nextCall.name : '-' }
-                            readOnly
-                        />
+                        {
+                        
+                        inputs.map((input, i) => {
+                            const {name} = input
+                            let value = '-';
 
-                        <Input
-                            label="Phone"
-                            type="text"
-                            name="phone"
-                            placeholder="Phone"
-                            value={ nextCall ? nextCall.phone : '-' }
-                            readOnly
-                        />
+                            if ( nextCall && nextCall[name] !== undefined ) {
+                                value = name === 'time' ? timeFromTimestamp(nextCall[name]) : nextCall[name]
+                            }
 
-                        <Input
-                            label="Time"
-                            type="text"
-                            name="time"
-                            placeholder="Time"
-                            value={ nextCall ? timeFromTimestamp(nextCall.time) : '-' }
-                            readOnly
-                        />
+
+                            return <Input key={i} {...input} value={value} readOnly />
+                        })
+                        
+                        }
                     </div>
                 </form>
             </section>
