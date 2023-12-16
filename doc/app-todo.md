@@ -8,6 +8,7 @@
 6. Рефакторинг
 
 Плани:
+
 1. Додати Redux Toolkit
 2. Typescript
 3. Переверстати на tilewind
