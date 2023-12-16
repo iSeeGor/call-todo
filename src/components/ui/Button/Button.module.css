@@ -9,6 +9,7 @@
     line-height: 1.6;
     border-radius: 6px;
     background-color: var(--button-background-color, white);
+
 }
 
 .Button:hover {
