@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { timeFromTimestamp } from '../../helpers/time.js'
 
-const TableItem = ({data, delCall}) => {
+const TableCallTodosRow = ({data, delCall}) => {
     const [completed, setCompleted] = useState(false);
     const { name, phone, time } = data;
 
@@ -34,4 +34,4 @@ const TableItem = ({data, delCall}) => {
     );
 };
 
-export default TableItem;
+export default TableCallTodosRow;

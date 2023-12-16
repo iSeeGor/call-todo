@@ -1,4 +1,4 @@
-import TableItem from '../Table/TableItem'
+import TableCallTodosRow from '../Table/TableCallTodosRow'
 import ButtonSort from "../ui/ButtonSort/ButtonSort.jsx";
 import Button from "../ui/Button/Button.jsx";
 import {useState} from "react";
@@ -66,7 +66,7 @@ const SectionCallTodos = ({callTodos, delCall}) => {
 
                         {sortedTodos && sortedTodos.length > 0 ? (
                             sortedTodos.map((item, index) => (
-                                <TableItem key={index} data={item} delCall={delCall} />
+                                <TableCallTodosRow key={index} data={item} delCall={delCall} />
                             ))
                         ) : (
                             <tr><td colSpan="5" style={{textAlign: 'center'}}>No calls available</td></tr>
