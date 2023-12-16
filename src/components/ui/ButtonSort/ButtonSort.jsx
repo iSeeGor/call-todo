@@ -1,27 +1,28 @@
 import classes from './ButtonSort.module.css';
 
-const ButtonSort = ({children, sortby, icon, isActive, onClick}) => {
-
+const ButtonSort = ({children, sortType, sortOptions, buttonSortHandler}) => {
+    const {sortby, order} = sortOptions;
+    const isActive = sortby && sortby === sortType;
     const arrows = {
         asc: '\u2BC5',
         desc: '\u2BC6'
     };
+
+    const onClick = () => {
+        buttonSortHandler({sortby: sortType});
+    }
 
     return (
         <>
          <button
              type="button"
              className={classes.ButtonSort}
-             onClick={() => {
-                 onClick({
-                     sortby: sortby
-                 });
-             }}
+             onClick={onClick}
          >
              {children}
 
                  {
-                     isActive && icon && icon.length ? arrows[icon] : ' '
+                    isActive ? arrows[order] : ' '
                  }
          </button>
         </>

@@ -1,4 +1,5 @@
 import TableCallTodosRow from '../Table/TableCallTodosRow'
+import TableCallTodosHeader from '../Table/TableCallTodosHeader';
 import ButtonSort from "../ui/ButtonSort/ButtonSort.jsx";
 import Button from "../ui/Button/Button.jsx";
 import {useState} from "react";
@@ -15,7 +16,7 @@ const SectionCallTodos = ({callTodos, delCall}) => {
         setOptions({filter: data.filter})
     }
 
-    const sortButtonHandler = (data) => {
+    const buttonSortHandler = (data) => {
         const order = options.order === 'asc' ? 'desc' : 'asc';
 
         setOptions({sortby: data.sortby, order: order})
@@ -48,21 +49,34 @@ const SectionCallTodos = ({callTodos, delCall}) => {
                 </header>
 
                 <table className="table">
+                    {/* <thead>
+                        <TableCallTodosHeader/>
+                    </thead> */}
                     <tbody>
                         <tr>
                             <th>
                                 <ButtonSort
-                                    sortby="name"
-                                    icon={options.order}
-                                    isActive={options.sortby === 'name'}
-                                    onClick={sortButtonHandler}
-                                >Name</ButtonSort>
+                                    sortType="name"
+                                    sortOptions={options}
+                                    buttonSortHandler={buttonSortHandler}
+                                >
+                                    Name
+                                </ButtonSort>
                             </th>
                             <th>Phone</th>
-                            <th><ButtonSort sortby="time" icon={options.order} onClick={sortButtonHandler} isActive={options.sortby === 'time'}>Time</ButtonSort></th>
+                            <th>
+                                <ButtonSort 
+                                    sortType="time" 
+                                    sortOptions={options} 
+                                    buttonSortHandler={buttonSortHandler}
+                                >
+                                    Time
+                                </ButtonSort>
+                            </th>
                             <th>Action</th>
                             <th>Finished</th>
                         </tr>
+                        
 
                         {sortedTodos && sortedTodos.length > 0 ? (
                             sortedTodos.map((item, index) => (
