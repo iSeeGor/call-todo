@@ -11,6 +11,8 @@ const TableItem = ({data, delCall}) => {
         delCall(time);
     }
 
+    // TODO: Бага!
+
     const isCompleted = () => new Date().getTime() > time
 
     useEffect(() => {
