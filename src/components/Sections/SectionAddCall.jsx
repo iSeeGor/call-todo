@@ -49,7 +49,7 @@ const SectionAddCall = ({addCall}) => {
             'name': 'phone',
             'placeholder':"xx(xxx)xxx xxx xxx",
             'type': 'text',
-            'pattern': '^(\\+|00)(\\(\\d{3}\\)|-?)(\\s?\\d{3}){3}$',
+            'pattern': '^(\\+|00)(\\(?\\d{3}\\)?-?)(\\s?\\d{3}){3}$',
             'errorMessage': 'Enter a valid phone number',
         },
         {   
