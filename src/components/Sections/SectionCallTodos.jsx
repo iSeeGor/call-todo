@@ -1,11 +1,11 @@
-import TableItem from './Table/TableItem'
-import ButtonSort from "./ui/ButtonSort/ButtonSort.jsx";
-import Button from "./ui/Button/Button.jsx";
+import TableItem from '../Table/TableItem'
+import ButtonSort from "../ui/ButtonSort/ButtonSort.jsx";
+import Button from "../ui/Button/Button.jsx";
 import {useState} from "react";
-import {useQuery} from "../helpers/useQuery.js";
+import {useQuery} from "../../helpers/useQuery.js";
 import { useEffect } from 'react';
 
-const CallsTable = ({callTodos, delCall}) => {
+const SectionCallTodos = ({callTodos, delCall}) => {
 
     const [options, setOptions] = useState({});
 
@@ -96,4 +96,4 @@ const CallsTable = ({callTodos, delCall}) => {
     );
 }
 
-export default CallsTable;
+export default SectionCallTodos;
