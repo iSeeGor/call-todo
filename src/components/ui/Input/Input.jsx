@@ -1,8 +1,7 @@
 import classes from './Input.module.css'
 import {useState} from "react";
 
-const Input = ({errorMessage, onChange, label,  ...attrs}) => {
-
+const Input = ({errorMessage, label,  value, updateInputValue, ...attrs}) => {
     const [errorMsg, setErrorMsg] = useState('');
     const [invalid, setInvalid] = useState(false);
 
@@ -18,6 +17,11 @@ const Input = ({errorMessage, onChange, label,  ...attrs}) => {
         }
     }
 
+    function onChange(e){
+        validate(e);
+        updateInputValue(e);
+    }
+
     return (
         <>
             <div className={classes.InputField}>
@@ -27,14 +31,10 @@ const Input = ({errorMessage, onChange, label,  ...attrs}) => {
 
                 <input
                     className={`${classes.Input} ${invalid ? classes.invalid : ''}`}
-                    // focused={focused.toString()}
-                    // onBlur={() => setIsInvalid(false)}
                     {...attrs}
+                    value={value}
                     required
-                    onChange={(e) => {
-                        onChange(e);
-                        validate(e)
-                    } }
+                    onChange={onChange}
                     onInvalid={validate}
                 />
                 {

@@ -9,11 +9,10 @@ const SectionAddCall = ({addCall}) => {
         phone: '',
         time: ''
     }
-    const [inputField, setInputField] = useState(emptyField);
+    const [inputValues, setinputValues] = useState(emptyField);
 
     const handleInvalid = (event) => {
         event.preventDefault();
-        // console.log(event)
     };
 
     const handleSubmit = (e) => {
@@ -29,12 +28,38 @@ const SectionAddCall = ({addCall}) => {
 
         addCall({...Object.fromEntries(data.entries())});
 
-        setInputField(emptyField);
+        setinputValues(emptyField);
     }
 
-    const onChange = (e) => {
-        setInputField({...inputField, [e.target.name]: e.target.value});
+    const updateInputValue = (e) => {
+        setinputValues({...inputValues, [e.target.name]: e.target.value});
     }
+
+    const inputs = [
+        {   
+            'label': 'Name',
+            'name': 'name',
+            'placeholder':"John",
+            'type': 'text',
+            'pattern': '^[A-Za-z0-9]{3,30}$',
+            'errorMessage': 'Name should be 3-30 characters',
+        },
+        {   
+            'label': 'Phone',
+            'name': 'phone',
+            'placeholder':"xx(xxx)xxx xxx xxx",
+            'type': 'text',
+            'pattern': '^(\\+|00)(\\(\\d{3}\\)|-?)(\\s?\\d{3}){3}$',
+            'errorMessage': 'Enter a valid phone number',
+        },
+        {   
+            'label': 'Time',
+            'name': 'time',
+            'type': 'time',
+            'errorMessage': 'Chouse a time',
+        },
+
+    ] 
 
     return (
         <>
@@ -45,44 +70,25 @@ const SectionAddCall = ({addCall}) => {
 
                 <form className="call-todo-form" onSubmit={handleSubmit} onInvalid={handleInvalid}>
                     <div className="call-todo-form__body">
-                        <Input
-                            label="Name"
-                            type="text"
-                            name="name"
-                            placeholder="John"
-                            pattern="^[A-Za-z0-9]{3,30}$"
-                            errorMessage="Name should be 3-30 characters"
-                            value={inputField.name}
-                            onChange={onChange}
-                        />
-
-                        <Input
-                            label="Phone"
-                            type="text"
-                            name="phone"
-                            placeholder="+x(xxx)xxx xxx xxx"
-                            pattern="^(\+|00)(\(?\d{3}\)?-?)(\s?\d{3}){3}$"
-                            errorMessage="Enter a valid phone number"
-                            value={inputField.phone}
-                            onChange={onChange}
-                        />
-
-                        <Input
-                            label="Time"
-                            type="time"
-                            name="time"
-                            placeholder="Time"
-                            errorMessage="Chouse a time"
-                            value={inputField.time}
-                            onChange={onChange}
-                        />
+                        {
+                        
+                        inputs.map((input, i) => {
+                            const {name} = input;
+                            return (
+                                <Input 
+                                    key={i} 
+                                    {...input} 
+                                    value={inputValues[name]} 
+                                    updateInputValue={updateInputValue} 
+                                />
+                            )
+                        })
+                        
+                        }
                     </div>
 
                     <div className="call-todo-form__footer">
-                        <button
-                            type="submit"
-                            className="button"
-                        >Add Call</button>
+                        <button type="submit" className="button">Add Call</button>
                     </div>
                 </form>
             </section>
