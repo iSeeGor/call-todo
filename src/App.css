@@ -97,11 +97,3 @@
 .table td {
   background-color: var(--table-body-bg-color);
 }
-
-.table-control {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 16px 0;
-}

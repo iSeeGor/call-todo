@@ -1,4 +1,4 @@
-export const useQuery = (data, options) => {
+export const sortAndFilter = (data, options) => {
   let sortedData = data;
   const timeNow = new Date().getTime();
 
@@ -46,5 +46,5 @@ export const useQuery = (data, options) => {
     sortedData = data;
   }
 
-  return [sortedData, options];
+  return sortedData;
 };

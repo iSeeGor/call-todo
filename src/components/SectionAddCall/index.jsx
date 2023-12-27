@@ -1,23 +1,23 @@
+import formFields from './config.js';
 import Input from '../ui/Input/Input.jsx';
 import { useState } from 'react';
 import { timeToTimestamp } from '../../helpers/time.js';
 import { preparePhone } from '../../helpers/preparePhone.js';
-import formFields from './config.js';
+import { addCall } from '../../features/callTodo/callTodoSlice';
+import { useDispatch } from 'react-redux';
 
-const SectionAddCall = ({ addCall }) => {
+const SectionAddCall = () => {
   const [inputValues, setInputValues] = useState({});
+  const dispatch = useDispatch();
 
   const handleInvalid = (event) => {
     event.preventDefault();
   };
 
   const resetFormFields = () => {
-    for (let key in inputValues) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (inputValues.hasOwnProperty(key)) {
-        inputValues[key] = '';
-      }
-    }
+    const emptyValues = Object.fromEntries(Object.keys(inputValues).map((key) => [key, '']));
+
+    setInputValues(emptyValues);
   };
 
   const handleSubmit = (e) => {
@@ -32,7 +32,7 @@ const SectionAddCall = ({ addCall }) => {
 
     const fields = Object.fromEntries(data.entries());
 
-    addCall({ ...fields });
+    dispatch(addCall({ ...fields }));
 
     resetFormFields();
   };
@@ -42,29 +42,27 @@ const SectionAddCall = ({ addCall }) => {
   };
 
   return (
-    <>
-      <section className="app-section">
-        <header className="app-section__header">
-          <h2 className="app-section__title">Add Call</h2>
-        </header>
+    <section className="app-section">
+      <header className="app-section__header">
+        <h2 className="app-section__title">Add Call</h2>
+      </header>
 
-        <form className="call-todo-form" onSubmit={handleSubmit} onInvalid={handleInvalid}>
-          <div className="call-todo-form__body">
-            {formFields.map((input, i) => {
-              const { name } = input;
+      <form className="call-todo-form" onSubmit={handleSubmit} onInvalid={handleInvalid}>
+        <div className="call-todo-form__body">
+          {formFields.map((input, i) => {
+            const { name } = input;
 
-              return <Input key={i} {...input} value={inputValues[name]} updateInputValue={updateInputValue} />;
-            })}
-          </div>
+            return <Input key={i} {...input} value={inputValues[name]} updateInputValue={updateInputValue} />;
+          })}
+        </div>
 
-          <div className="call-todo-form__footer">
-            <button type="submit" className="button">
-              Add Call
-            </button>
-          </div>
-        </form>
-      </section>
-    </>
+        <div className="call-todo-form__footer">
+          <button type="submit" className="button">
+            Add Call
+          </button>
+        </div>
+      </form>
+    </section>
   );
 };
 

@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import { timeFromTimestamp } from '../../helpers/time.js';
+import { useDispatch } from 'react-redux';
+import { removeCall } from '../../features/callTodo/callTodoSlice.js';
 
-const TableCallTodosRow = ({ data, delCall }) => {
+const TableCallTodosRow = ({ data }) => {
   const [completed, setCompleted] = useState(false);
   const { name, phone, time } = data;
+
+  const dispatch = useDispatch();
 
   const handleDelete = (e) => {
     e.preventDefault();
 
-    delCall(time);
+    dispatch(removeCall({ time }));
   };
 
   const calculateCompletedStatus = () => new Date().getTime() > time;
