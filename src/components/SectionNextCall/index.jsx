@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Input from '../ui/Input/Input';
 import { timeFromTimestamp } from '../../helpers/time.js';
 import { closestTime as getClosestTime } from '../../helpers/closestTime.js';
+import inputs from './config.js';
 
 const SectionNextCall = ({ callTodos }) => {
   const [nextCall, setNextCall] = useState(null);
@@ -25,24 +26,6 @@ const SectionNextCall = ({ callTodos }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callTodos]);
-
-  const inputs = [
-    {
-      label: 'Name',
-      name: 'name',
-      type: 'text',
-    },
-    {
-      label: 'Phone',
-      name: 'phone',
-      type: 'text',
-    },
-    {
-      label: 'Time',
-      name: 'time',
-      type: 'text',
-    },
-  ];
 
   return (
     <>

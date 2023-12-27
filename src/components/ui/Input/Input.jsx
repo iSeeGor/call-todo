@@ -23,21 +23,19 @@ const Input = ({ errorMessage, label, value, updateInputValue, ...attrs }) => {
   }
 
   return (
-    <>
-      <div className={classes.InputField}>
-        {label && <label className={classes.InputLabel}>{label}</label>}
+    <div className={classes.InputField}>
+      {label && <label className={classes.InputLabel}>{label}</label>}
 
-        <input
-          className={`${classes.Input} ${invalid ? classes.invalid : ''}`}
-          {...attrs}
-          value={value}
-          required
-          onChange={onChange}
-          onInvalid={validate}
-        />
-        {invalid ? <span className={classes.InputError}>{errorMsg}</span> : false}
-      </div>
-    </>
+      <input
+        className={`${classes.Input} ${invalid ? classes.invalid : ''}`}
+        {...attrs}
+        value={value ? value : ''}
+        required
+        onChange={onChange}
+        onInvalid={validate}
+      />
+      {invalid ? <span className={classes.InputError}>{errorMsg}</span> : false}
+    </div>
   );
 };
 

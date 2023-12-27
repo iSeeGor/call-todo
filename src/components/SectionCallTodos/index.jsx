@@ -4,6 +4,7 @@ import Button from '../ui/Button/Button.jsx';
 import { useState } from 'react';
 import { useQuery } from '../../helpers/useQuery.js';
 import { useEffect } from 'react';
+import filterButtons from './config.js';
 
 const SectionCallTodos = ({ callTodos, delCall }) => {
   const [options, setOptions] = useState({});
@@ -19,21 +20,6 @@ const SectionCallTodos = ({ callTodos, delCall }) => {
 
     setOptions({ sortby: data.sortby, order: order });
   };
-
-  const buttons = [
-    {
-      name: 'all',
-      title: 'All',
-    },
-    {
-      name: 'next',
-      title: 'Next',
-    },
-    {
-      name: 'finished',
-      title: 'Finished',
-    },
-  ];
 
   useEffect(() => {
     setOptions(sortOptions);
@@ -78,7 +64,7 @@ const SectionCallTodos = ({ callTodos, delCall }) => {
         </table>
 
         <div className="table-control">
-          {buttons.map((button, i) => {
+          {filterButtons.map((button, i) => {
             return (
               <Button
                 key={i}

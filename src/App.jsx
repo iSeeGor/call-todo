@@ -1,8 +1,8 @@
 import './App.css';
 import useLocalStorage from './hooks/useLocalStorage.js';
-import SectionAddCall from './components/Sections/SectionAddCall';
-import SectionNextCall from './components/Sections/SectionNextCall';
-import SectionCallTodos from './components/Sections/SectionCallTodos';
+import SectionAddCall from './components/SectionAddCall';
+import SectionNextCall from './components/SectionNextCall';
+import SectionCallTodos from './components/SectionCallTodos';
 
 function App() {
   const [callTodos, setCallTodos] = useLocalStorage([], 'callTodos');

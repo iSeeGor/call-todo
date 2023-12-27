@@ -1,18 +1,23 @@
-import Input from '../ui/Input/Input';
+import Input from '../ui/Input/Input.jsx';
 import { useState } from 'react';
 import { timeToTimestamp } from '../../helpers/time.js';
-import { preparePhone } from '../../helpers/preparePhone';
+import { preparePhone } from '../../helpers/preparePhone.js';
+import formFields from './config.js';
 
 const SectionAddCall = ({ addCall }) => {
-  const emptyField = {
-    name: '',
-    phone: '',
-    time: '',
-  };
-  const [inputValues, setinputValues] = useState(emptyField);
+  const [inputValues, setInputValues] = useState({});
 
   const handleInvalid = (event) => {
     event.preventDefault();
+  };
+
+  const resetFormFields = () => {
+    for (let key in inputValues) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (inputValues.hasOwnProperty(key)) {
+        inputValues[key] = '';
+      }
+    }
   };
 
   const handleSubmit = (e) => {
@@ -25,39 +30,16 @@ const SectionAddCall = ({ addCall }) => {
     data.set('time', timestamp.toString());
     data.set('phone', preparePhone(phone));
 
-    addCall({ ...Object.fromEntries(data.entries()) });
+    const fields = Object.fromEntries(data.entries());
 
-    setinputValues(emptyField);
+    addCall({ ...fields });
+
+    resetFormFields();
   };
 
   const updateInputValue = (e) => {
-    setinputValues({ ...inputValues, [e.target.name]: e.target.value });
+    setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
-
-  const inputs = [
-    {
-      label: 'Name',
-      name: 'name',
-      placeholder: 'John',
-      type: 'text',
-      pattern: '^[A-Za-z0-9]{3,30}$',
-      errorMessage: 'Name should be 3-30 characters',
-    },
-    {
-      label: 'Phone',
-      name: 'phone',
-      placeholder: 'xx(xxx)xxx xxx xxx',
-      type: 'text',
-      pattern: '^(\\+|00)(\\(?\\d{3}\\)?-?)(\\s?\\d{3}){3}$',
-      errorMessage: 'Enter a valid phone number',
-    },
-    {
-      label: 'Time',
-      name: 'time',
-      type: 'time',
-      errorMessage: 'Chouse a time',
-    },
-  ];
 
   return (
     <>
@@ -68,8 +50,9 @@ const SectionAddCall = ({ addCall }) => {
 
         <form className="call-todo-form" onSubmit={handleSubmit} onInvalid={handleInvalid}>
           <div className="call-todo-form__body">
-            {inputs.map((input, i) => {
+            {formFields.map((input, i) => {
               const { name } = input;
+
               return <Input key={i} {...input} value={inputValues[name]} updateInputValue={updateInputValue} />;
             })}
           </div>
